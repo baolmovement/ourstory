@@ -1,7 +1,7 @@
 const Story = require('../models/Story.js');
 
 exports.index = (req, res) => {
-    Story.find({}, (err, Story) => {
+    Story.find({}).populate('_by').exec((err, Story) => {
         if(err){
             res.json({status: "FAIL", err})
         } else {
@@ -11,7 +11,7 @@ exports.index = (req, res) => {
 };
 
 exports.new = (req, res) => {
-    Story.create(req.body, (err, newStory) => {
+    Story.create({ ...req.body, _by: req.user}, (err, newStory) => {
         if(err){
             res.json({status: "FAIL", err});
         } else {
@@ -41,5 +41,24 @@ exports.destroy = (req,res) => {
     Story.findByIdAndRemove(req.params.id, (err, deletedStory) => {
         if(err) return console.log(err);
         res.json({status: "DELETED", payload: deletedStory})
+    })
+}
+
+exports.like = (req, res) => {
+    Story.findById(req.params.id, (err, story) => {
+        if(err) return console.log(err);
+        const alreadyLiked = !!(story.likes.find((l) => {
+            return l.userId.equals(req.user._id)
+        }))
+
+        if(!alreadyLiked){
+            story.likes.push({userId: req.user._id})
+            story.save((err) => {
+                if(err)return console.log(err, story)
+                res.json({status: "SUCCESS", payload: story})
+            })
+        } else {
+            res.json({status: "ERROR", payload: null, message: "ALREADY LIKED"})
+        }
     })
 }

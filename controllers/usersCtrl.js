@@ -1,6 +1,7 @@
 const 
 	User = require('../models/User.js'),
-	Story = require('../models/Story.js')
+    Story = require('../models/Story.js'),
+    {signToken} = require('../serverAuth.js')
 
 
 module.exports = {
@@ -26,21 +27,21 @@ module.exports = {
 	// create a new user
 	create: (req, res) => {
 		User.create(req.body, (err, user) => {
-			if(err) return res.json({message: "ERROR"})
-			res.json({ message: "SUCCESS", payload: user })
+			if(err) return res.json({message: "ERROR", payload: null, code: err.code})
+			const token = signToken(user)
+			res.json({ message: "SUCCESS", payload: token })
 		})
 	},
 
 	// update an existing user
 	update: (req, res) => {
-        let { id } = req.params
-        User.findByIdAndUpdate(id, { $set: req.body }, {new: true }, (err, userFromDB) => {
-          if (err) {
-            res.redirect('api/users')
-          } else {
-            res.json({status: "SUCCESS", payload: userFromDB })
-          }
-        })
+        if(!req.body.password) delete req.body.password
+			Object.assign(req.user, req.body)
+			req.user.save((err, updatedUser) => {
+				if(err) return res.json({message: "ERROR", payload: null, code: err.code})
+				const token = signToken(updatedUser)
+				res.json({ message: "SUCCESS", payload: token })
+			})
       },
 
 	// delete an  user
@@ -53,5 +54,16 @@ module.exports = {
                 res.json({ message: "SUCCESS", payload: deletedUser })
             }
         })
+	},
+    
+    authenticate: (req, res) => {
+		User.findOne({email: req.body.email}, (err, user) => {
+			if(err) return res.json({message: "ERROR", payload: null, code: err.code})
+			if(!user || !user.validPassword(req.body.password)) {
+				return res.json({message: "ERROR", payload: null, error: "Invalid credentials"})
+			}
+			const token = signToken(user)
+			res.json({message: "SUCCESS", payload: token})
+		})
 	}
 }
