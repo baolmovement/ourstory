@@ -17,8 +17,8 @@ module.exports = {
 		User.findById(req.params.id, (err, user) => {
 			if(err) return res.json({message: "ERROR", payload: null, code: err.code})
 			Story.find({_by: req.params.id}, (err, stories)=>{
-				if(err) return res.json({message: "ERROR", payload: null, code: err.code})
-				res.json({ message: "SUCCESS", payload: {user, tweets} })
+				if(err) return res.json({message: "ERROR"})
+				res.json({ message: "SUCCESS", payload: {user, stories} })
 			})	
 		})
 	},
@@ -26,28 +26,32 @@ module.exports = {
 	// create a new user
 	create: (req, res) => {
 		User.create(req.body, (err, user) => {
-			if(err) return res.json({message: "ERROR", payload: null, code: err.code})
-			const token = signToken(user)
-			res.json({ message: "SUCCESS", payload: token })
+			if(err) return res.json({message: "ERROR"})
+			res.json({ message: "SUCCESS", payload: user })
 		})
 	},
 
 	// update an existing user
 	update: (req, res) => {
-		if(!req.body.password) delete req.body.password
-        Object.assign(req.user, req.body)
-        req.user.save((err, updatedUser) => {
-            if(err) return res.json({message: "ERROR", payload: null, code: err.code})
-            const token = signToken(updatedUser)
-            res.json({ message: "SUCCESS", payload: token })
-        })	
-	},
+        let { id } = req.params
+        User.findByIdAndUpdate(id, { $set: req.body }, {new: true }, (err, userFromDB) => {
+          if (err) {
+            res.redirect('api/users')
+          } else {
+            res.json({status: "SUCCESS", payload: userFromDB })
+          }
+        })
+      },
 
-	// delete an existing user
+	// delete an  user
 	destroy: (req, res) => {
-		req.user.remove((err, user) => {
-			if(err) return res.json({message: "ERROR", payload: null, code: err.code})
-			res.json({ message: "SUCCESS", payload: user })
-		})
+		let { id } = req.params;
+        User.findByIdAndRemove(id, (err, deletedUser) => {
+            if (err)return res.json({message: "ERROR"})
+            else {
+                res.redirect('api/users');
+                res.json({ message: "SUCCESS", payload: deletedUser })
+            }
+        })
 	}
 }
