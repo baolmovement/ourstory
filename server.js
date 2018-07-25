@@ -7,6 +7,7 @@ const
     mongoose = require('mongoose'),
     userRouter = require('./routes/userRouter.js'),
     storyRouter = require('./routes/storyRouter.js'), 
+    commentRouter = require('./routes/storyRouter.js'), 
     PORT = 3001;  
 
 //DB CONNECTION 
@@ -21,6 +22,7 @@ app.use(express.json()) //Bodyparser -- interpretting data from DB
 //ROUTER
 app.use('/api/users', userRouter) //Express using routes from a seperate file called usersRouter.js
 app.use('/api/stories', storyRouter) //Express using routes from a seperate file called storyRouter.js
+app.use('api/stories/:id/comments', commentRouter) //Express using routes from a seperate file called commentRouter.js
 
 //BACKEND PORT
 app.listen(PORT, (err) => {
