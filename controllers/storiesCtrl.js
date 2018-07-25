@@ -21,7 +21,7 @@ exports.new = (req, res) => {
 }
 
 exports.show = (req,res) => {
-    Story.findById(req.params.id, (err, Story) =>{
+    Story.findById(req.params.id).populate('comments').exec((err, Story) =>{
         if(err){
             res.json({status: "Fail", err})
         } else {

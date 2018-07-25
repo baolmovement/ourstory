@@ -51,7 +51,6 @@ module.exports = {
         User.findByIdAndRemove(id, (err, deletedUser) => {
             if (err)return res.json({message: "ERROR"})
             else {
-                res.redirect('api/users');
                 res.json({ message: "SUCCESS", payload: deletedUser })
             }
         })

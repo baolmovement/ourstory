@@ -25,6 +25,7 @@ class Home extends React.Component {
                 return (
                     <li key={s._id}>
                         <Link to={`/story/${s._id}`}>{s.title}</Link>
+                        <p>{s.likes.length} likes</p>
                     </li>
                 )
                 })}

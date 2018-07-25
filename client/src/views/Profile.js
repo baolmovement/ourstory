@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios' 
 import {Link} from 'react-router-dom'
+import httpClient from '../httpClient'
 
 const apiClient = axios.create()
 
@@ -16,11 +17,26 @@ class Profile extends React.Component {
         })
     }
 
+    deleteUser = (e) => {
+        e.preventDefault()
+        let {_id} = this.props.currentUser
+        httpClient({
+            method: 'delete',
+            url: `/api/users/${_id}`
+        })
+        .then(apiResponse => {
+            httpClient.logOut()
+            this.props.onDeleteUser()
+            this.props.history.push('/')
+        })
+    }
+
     render(){
     return (
         <div className="Profile">
             <h1>PROFILE</h1>
-            <Link to={"/profile/edit"}>EDIT PROFILE</Link>
+            <Link to={"/profile/edit"}>EDIT PROFILE</Link> 
+            <button onClick={this.deleteUser}>DELETE ACCOUNT</button>
             <ul>
                 {this.state.userstories.map((s) => {
                 return (

@@ -20,17 +20,28 @@ class Story extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault()
         console.log(this.props.match.params.id);
-        debugger
         httpClient({
             method: 'post', 
             url: `/api/stories/${this.props.match.params.id}/likes`,
             data: currentUser
         })
         .then(apiResponse => {
-            debugger
+
             this.setState({story: apiResponse.data.payload})
         })
     }
+
+    // deleteStory = (e) => {
+    //     e.preventDefault()
+    //     let {id} = this.props.match.params
+    //     httpClient({
+    //         method: 'delete',
+    //         url: `/api/stories/${id}`
+    //     })
+    //     .then(apiResponse => {
+    //         this.props.history.push('/')
+    //     })
+    // }
 
     render(){
         let {story} = this.state
@@ -44,7 +55,8 @@ class Story extends React.Component {
                 <Like 
                     handleSubmit={this.handleSubmit}
                     currentUser={currentUser}  
-                />
+                /> 
+                <button onClick={this.deleteStory}>DELETE</button>
             </div>
         )
     }

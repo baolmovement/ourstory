@@ -56,7 +56,7 @@ class App extends Component {
           
           <Route path = "/profile" render={(routeProps) => {
             return this.state.currentUser
-            ? <Profile {...routeProps} currentUser={this.state.currentUser}/>
+            ? <Profile {...routeProps} currentUser={this.state.currentUser} onDeleteUser={this.onLogOutSuccess.bind(this)}/>
             : <Redirect to="/login"/>
           }} />
 

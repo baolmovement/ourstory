@@ -9,7 +9,8 @@ const storySchema = new mongoose.Schema({
     description: {type: String, required: true}, 
     body: {type: String, required: true},
     likes: [likeSchema], 
-    _by: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+    _by: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
 })  
 
 
