@@ -4,24 +4,25 @@ import {Link} from 'react-router-dom'
 
 const apiClient = axios.create()
 
-class Home extends React.Component {
+class Profile extends React.Component {
     state = {
-        stories: []
+        userstories: []
     }
 
     componentDidMount() {
-        apiClient({method: 'get', url: '/api/stories'})
+        apiClient({method: 'get', url: `/api/users/${this.props.currentUser._id}`})
         .then((apiResponse) => {
-          this.setState({stories: apiResponse.data.payload})
+          this.setState({userstories: apiResponse.data.payload.stories})
         })
     }
 
     render(){
     return (
-        <div className="Home">
-            <h1>HOME</h1>
+        <div className="Profile">
+            <h1>PROFILE</h1>
+            <Link to={"/profile/edit"}>EDIT PROFILE</Link>
             <ul>
-                {this.state.stories.map((s) => {
+                {this.state.userstories.map((s) => {
                 return (
                     <li key={s._id}>
                         <Link to={`/story/${s._id}`}>{s.title}</Link>
@@ -34,4 +35,4 @@ class Home extends React.Component {
     }
 }
 
-export default Home
+export default Profile

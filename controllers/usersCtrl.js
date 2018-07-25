@@ -35,13 +35,14 @@ module.exports = {
 
 	// update an existing user
 	update: (req, res) => {
+		console.log(req.body)
         if(!req.body.password) delete req.body.password
-			Object.assign(req.user, req.body)
-			req.user.save((err, updatedUser) => {
-				if(err) return res.json({message: "ERROR", payload: null, code: err.code})
-				const token = signToken(updatedUser)
-				res.json({ message: "SUCCESS", payload: token })
-			})
+		Object.assign(req.user, req.body)
+		req.user.save((err, updatedUser) => {
+			if(err) return res.json({message: "ERROR", payload: null, code: err.code})
+			const token = signToken(updatedUser)
+			res.json({ message: "SUCCESS", payload: token, user: updatedUser })
+		})
       },
 
 	// delete an  user

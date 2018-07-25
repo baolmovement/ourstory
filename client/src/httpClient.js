@@ -57,6 +57,22 @@ httpClient.logOut = function() {
     return true
 }
 
+httpClient.updateProfile = function(userInfo) {
+    //returns a promise, able to 
+    return this({method: 'patch', url: `/api/users/me`, data: userInfo})
+        .then((serverResponse) => {
+            if(serverResponse.data.message === "SUCCESS") {
+                //if successful establish what the token is
+                const token = serverResponse.data.payload
+                //saves token to local library and to send token to header
+                this.defaults.headers.common.token = this.setToken(token)
+                return jwtDecode(token)
+            } else {
+                return false
+            }
+        })
+}
+
 //send request with token in header
 httpClient.defaults.headers.common.token = httpClient.getToken()
 export default httpClient

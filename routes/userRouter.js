@@ -9,7 +9,7 @@ userRouter.post('/', usersCtrl.create)
 userRouter.post('/authenticate', usersCtrl.authenticate)
 userRouter.use(verifyToken)
 userRouter.get('/:id', usersCtrl.show)
-userRouter.patch('/:id', usersCtrl.update)
+userRouter.patch('/me', usersCtrl.update)
 userRouter.delete('/:id', usersCtrl.destroy)
 
 module.exports = userRouter
