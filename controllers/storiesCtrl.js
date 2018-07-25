@@ -50,7 +50,7 @@ exports.like = (req, res) => {
         const alreadyLiked = !!(story.likes.find((l) => {
             return l.userId.equals(req.user._id)
         }))
-
+        console.log(alreadyLiked);
         if(!alreadyLiked){
             story.likes.push({userId: req.user._id})
             story.save((err) => {

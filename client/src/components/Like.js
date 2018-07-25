@@ -1,10 +1,10 @@
 import React from 'react'
 
 const Like = (props) => {
-    let { handleSubmit, currentUser } = props;
+    let { handleSubmit } = props;
     return( 
         <div>
-            <form onSubmit={handleSubmit} currentUser={currentUser}>
+            <form onSubmit={handleSubmit}>
                 <button> Like </button>
             </form>
         </div>

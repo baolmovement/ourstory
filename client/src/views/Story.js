@@ -7,26 +7,28 @@ const currentUser =  httpClient.getCurrentUser()
 class Story extends React.Component {
     
     state = {
-        story: null, 
-        likes: null
+        story: null
     }
 
     componentDidMount() {
         httpClient({method: 'get', url: `/api/stories/${this.props.match.params.id}`})
         .then((apiResponse) => {
-          this.setState({story: apiResponse.data.payload, likes: apiResponse.data.payload.likes})
+          this.setState({story: apiResponse.data.payload});
         })
     } 
 
     handleSubmit = (e) => {
         e.preventDefault()
+        console.log(this.props.match.params.id);
+        debugger
         httpClient({
             method: 'post', 
-            url: `/api/stories/${this.props.match.params.id}`,
+            url: `/api/stories/${this.props.match.params.id}/likes`,
             data: currentUser
         })
         .then(apiResponse => {
-            this.props.history.push(`/stories/${apiResponse.data.payload._id}`)
+            debugger
+            this.setState({story: apiResponse.data.payload})
         })
     }
 
