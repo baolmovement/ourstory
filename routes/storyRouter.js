@@ -14,12 +14,11 @@ router.post('/:id', Stories.update)//goes to Stories controller and accesses met
 router.post('/', Stories.new) //goes to Stories controller and accesses method called new
 router.patch('/:id', Stories.update)//goes to Stories controller and accesses method called update
 router.delete('/:id', Stories.destroy)//goes to Stories controller and accesses method called destroy
+
 // Comments
 router.post('/:id/comments/:commentid/likes', Comments.like)
-// router.post('/:id/comments/:commentid', Comments.update)//goes to Comments controller and accesses method called update
 router.post('/:id/comments', Comments.new) //goes to Comments controller and accesses method called new
-// router.patch('/:id/comments/:commentid', Comments.update)//goes to Comments controller and accesses method called update
-// router.delete('/:id/comments/:commentid', Comments.destroy)//goes to Comments controller and accesses method called destroy
+router.delete('/:id/comments/:commentid', Comments.destroy)//goes to Comments controller and accesses method called destroy
     
 
 module.exports = router;

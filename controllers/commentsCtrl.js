@@ -51,3 +51,10 @@ exports.like = (req, res) => {
         }
     })
 }
+
+exports.destroy = (req,res) => {
+    Comment.findByIdAndRemove(req.params.commentid, (err, deletedComment) => {
+        if(err) return console.log(err);
+        res.json({status: "DELETED", payload: deletedComment})
+    })
+}
