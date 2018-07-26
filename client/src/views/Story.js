@@ -2,6 +2,8 @@ import React from 'react'
 import httpClient from '../httpClient'  
 import {Link} from 'react-router-dom'
 import Like from '../components/Like.js';
+import Comments from '../components/Comments.js'
+import CommentFormModal from '../components/CommentForm.js'
 const currentUser =  httpClient.getCurrentUser()
 
 class Story extends React.Component {
@@ -26,22 +28,21 @@ class Story extends React.Component {
             data: currentUser
         })
         .then(apiResponse => {
-
             this.setState({story: apiResponse.data.payload})
         })
     }
 
-    // deleteStory = (e) => {
-    //     e.preventDefault()
-    //     let {id} = this.props.match.params
-    //     httpClient({
-    //         method: 'delete',
-    //         url: `/api/stories/${id}`
-    //     })
-    //     .then(apiResponse => {
-    //         this.props.history.push('/')
-    //     })
-    // }
+    deleteStory = (e) => {
+        e.preventDefault()
+        let {id} = this.props.match.params
+        httpClient({
+            method: 'delete',
+            url: `/api/stories/${id}`
+        })
+        .then(apiResponse => {
+            this.props.history.push('/')
+        })
+    }
 
     render(){
         let {story} = this.state
@@ -55,7 +56,9 @@ class Story extends React.Component {
                 <Like 
                     handleSubmit={this.handleSubmit}
                     currentUser={currentUser}  
-                /> 
+                />  
+                <Comments storyId={story._id}/> 
+                <CommentFormModal storyId={story._id}/>
                 <button onClick={this.deleteStory}>DELETE</button>
             </div>
         )

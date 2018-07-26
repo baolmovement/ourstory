@@ -11,9 +11,3 @@ var story = {
         { _id: 456, likes: [{}, {}, {}] }
     ]
 }
-
-// {/* <div>
-//     {story.body} {story.acceptedComments.map((c) => {
-//         return c.body
-//     })}
-// </div> */}
