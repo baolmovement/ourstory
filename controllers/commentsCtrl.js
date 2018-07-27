@@ -44,7 +44,22 @@ exports.like = (req, res) => {
             comment.likes.push({userId: req.user._id})
             comment.save((err) => {
                 if(err)return console.log(err, comment)
-                res.json({status: "SUCCESS", payload: comment})
+                // if comment likes reaches threshold, move it to story's "accepted" list:
+                Story.findById(comment._story)
+                    .populate('comments')
+                    .populate('acceptedComments')
+                    .exec((err, story) => {
+                        if(comment.likes.length >= 2) {
+                            // empty story comments, but add this comment to accepted comments:
+                            story.comments = []
+                            story.acceptedComments.push(comment)
+                            story.save((err, story) => {
+                                res.json({status: "SUCCESS", payload: story})
+                            })
+                        } else {
+                            res.json({status: "SUCCESS", payload: story})
+                        }
+                    })
             })
         } else {
             res.json({status: "ERROR", payload: null, message: "ALREADY LIKED"})

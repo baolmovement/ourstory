@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import milligram from 'milligram'
 import {Route, Switch, Redirect} from 'react-router-dom';
 import httpClient from './httpClient';
 import './App.css';
@@ -13,13 +14,16 @@ import Post from './views/Post';
 import EditUser from './views/EditUser';
 import EditStory from './views/EditStory';
 
+
 class App extends Component {
   state = {
-    currentUser: httpClient.getCurrentUser()
+    currentUser: httpClient.getCurrentUser(),
+    userId: null
   }
 
   onAuthSuccess() {
     this.setState({currentUser: httpClient.getCurrentUser() })
+    console.log(this.state.currentUser)
   }
 
   onLogOutSuccess() {
@@ -70,7 +74,9 @@ class App extends Component {
             : <Redirect to="/login"/>
           }} />
          
-          <Route exact path = "/story/:id" component = {Story} />
+          <Route exact path = "/story/:id" render={(routeProps) => {
+            return <Story {...routeProps} currentUser={this.state.currentUser} />
+          }} />
           
           <Route path='/post' component={Post} />
           

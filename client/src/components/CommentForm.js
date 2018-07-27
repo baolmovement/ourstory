@@ -16,15 +16,7 @@ class CommentFormModal extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        let {description, body} = this.state
-        httpClient({
-            method: 'post', 
-            url: `/api/stories/${this.props.storyId}/comments`,
-            data: {description, body}
-        })
-        .then(apiResponse => {
-            this.setState({comments: apiResponse.data.payload})
-        })
+        this.props.onFormSubmit(this.state)
     }
     
     render(){

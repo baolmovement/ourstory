@@ -15,6 +15,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err) => {
 } )
 
 //MIDDLEWARE
+app.use(express.static(`${__dirname}/client/build`))
 app.use(logger('dev'));
 app.use(express.json()) //Bodyparser -- interpretting data from DB
 

@@ -22,7 +22,6 @@ class Login extends React.Component {
 
   onFormSubmit(evt) {
     evt.preventDefault()
-    console.log(this.state.fields)
     httpClient.logIn(this.state.fields).then((user) => {
       this.setState({fields: {email: '', password:''}})
       if(user) {
