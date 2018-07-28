@@ -1,6 +1,4 @@
 import React, {Component} from 'react'
-import httpClient from '../httpClient'
-
 
 class CommentFormModal extends Component {
     state = {
@@ -17,6 +15,7 @@ class CommentFormModal extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.onFormSubmit(this.state)
+        e.target.value = null
     }
     
     render(){

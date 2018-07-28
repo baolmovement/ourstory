@@ -36,16 +36,16 @@ class Profile extends React.Component {
         <div className="Profile">
             <h1>PROFILE</h1>
             <Link to={"/profile/edit"}>EDIT PROFILE</Link> 
-            <button onClick={this.deleteUser}>DELETE ACCOUNT</button>
-            <ul>
+           
                 {this.state.userstories.map((s) => {
-                return (
-                    <li key={s._id}>
-                        <Link to={`/story/${s._id}`}>{s.title}</Link>
-                    </li>
-                )
+                    return (
+                        <p key={s._id}>
+                            <Link to={`/story/${s._id}`}>{s.title}</Link>
+                        </p>
+                    )
                 })}
-            </ul>
+            <div><button onClick={this.deleteUser}>DELETE ACCOUNT</button></div> 
+           
         </div>
     )
     }

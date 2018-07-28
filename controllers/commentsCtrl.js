@@ -12,6 +12,16 @@ exports.index = (req, res) => {
     }) 
 };
 
+exports.show = (req, res) => {
+    Comment.findById(req.params.commentid, (err, comment) =>{
+        if(err){
+            res.json({status: "Fail", err})
+        } else {
+            res.json({status: "Success", payload: comment})
+        }
+    })
+}
+
 
 exports.new = (req, res) => {
     console.log(req.params)
@@ -72,4 +82,21 @@ exports.destroy = (req,res) => {
         if(err) return console.log(err);
         res.json({status: "DELETED", payload: deletedComment})
     })
+}
+
+exports.unlike = (req,res) => {
+    Comment.findById(req.params.commentid, (err, comment) => {
+        if(err) return console.log(err);
+        let { _id } = req.user;
+        comment.likes = comment.likes.filter(l => { 
+            !l.userId.equals(_id)
+            });
+
+        comment.save((err) => {
+            if(err)return console.log(err, comment)
+            res.json({ status: "SUCCESS" })
+
+    })
+       
+})
 }

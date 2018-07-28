@@ -61,4 +61,24 @@ exports.like = (req, res) => {
             res.json({status: "ERROR", payload: null, message: "ALREADY LIKED"})
         }
     })
+
+    // exports.unlike = (req,res) => {
+    //     Story.findById(req.params.id, (err, story) => {
+    //         console.log(story)
+    //         if(err) return console.log(err);
+           
+    //         let { _id } = req.user;
+    //         story.likes = story.likes.filter(l => { 
+    //             !l.userId.equals(_id)
+    //         });
+
+    //         story.save((err) => {
+    //             if(err)return console.log(err, comment)
+    //             res.json({ status: "SUCCESS" })
+    
+    //         })
+           
+    //     })
+    // }
 }
+

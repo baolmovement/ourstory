@@ -15,11 +15,16 @@ class Story extends React.Component {
     componentDidMount() {
         httpClient({method: 'get', url: `/api/stories/${this.props.match.params.id}`})
         .then((apiResponse) => {
-          this.setState({story: apiResponse.data.payload, acceptedComments: apiResponse.data.payload.comments.find((c) => 
-              c.likes.length>1
-          )});
+          this.setState({story: apiResponse.data.payload});
         })
     } 
+
+    getUserName = () => {
+        httpClient({
+            method: 'get',
+            url:`/api/users/${this.props.match.params.id}`
+        })
+    }
 
     handleSubmit = (e) => {
         const { currentUser } = this.props
@@ -31,7 +36,7 @@ class Story extends React.Component {
         })
         .then(apiResponse => {
             let { status } = apiResponse.data;
-            if (status != "ERROR") {
+            if (status !== "ERROR") {
                 this.setState({story: apiResponse.data.payload})
             }
         })
@@ -53,6 +58,7 @@ class Story extends React.Component {
                 }
             });
         })
+        console.log(this.state.story.comments)
     }
 
     handleCommentLike(updatedStory) {
@@ -69,6 +75,17 @@ class Story extends React.Component {
         //         ]            }
         // })
     }
+
+    handleStoryUnlike = (e) => {
+        e.preventDefault()
+         httpClient({
+             method: 'delete', 
+             url: `/api/stories/${this.state.story._id}/likes/${this.props.currentUser._id}`,
+         })
+         .then(apiResponse => {
+            this.props.history.push('/')
+        })
+     }
 
     handleCommentDelete(deletedComment) {
         const { story } = this.state
@@ -92,7 +109,61 @@ class Story extends React.Component {
         })
     }
 
+    //comment methods 
+    handleSubmit = (e) => {
+        e.preventDefault()
+        let { id } = e.target.dataset
+         httpClient({
+             method: 'post', 
+             url: `/api/stories/${this.state.story._id}/comments/${id}/likes`,
+         })
+         .then(apiResponse => {
+             let { payload, status } = apiResponse.data;
+             if (status !== "ERROR") {
+                this.handleCommentLike(payload)   
+             }
+         })
+     }
+
+     handleUnlike = (e) => {
+        e.preventDefault()
+        let { id } = e.target.dataset
+         httpClient({
+             method: 'delete', 
+             url: `/api/stories/${this.state.story._id}/comments/${id}/likes/${this.props.currentUser._id}`,
+         })
+         .then(apiResponse => {
+            this.props.history.push('/')
+           
+        })
+     }
+ 
+     deleteComment = (e) => {
+         e.preventDefault()
+         let { id } = e.target.dataset
+         httpClient({
+             method: 'delete',
+             url: `/api/stories/${this.state.story._id}/comments/${id}`
+         })
+         .then(apiResponse => {
+             const deletedComment = apiResponse.data.payload
+             this.handleCommentDelete(deletedComment)
+         })
+     }
+ 
+     checkIfLiked = (c) => {
+         let { likes } = c;
+         let liked = likes.find(l => l.userId === this.props.currentUser._id);
+         if (!!liked) return <button onClick={this.handleUnlike} data-id={c._id}>Unlike</button>;
+         return (
+             <form data-id={c._id} onSubmit={this.handleSubmit}>
+                 <button>LIKE</button>
+             </form>
+         )
+     }
+ 
     render(){
+        
         let {story} = this.state;
         if(!story)return(<h1>Loading Story...</h1>)
         const { currentUser } = this.props
@@ -112,7 +183,7 @@ class Story extends React.Component {
                 {}
                 
                 {alreadyLiked
-                    ? <button>Unlike</button>
+                    ? (<button onClick={this.handleUnlike.bind(this)}>Unlike</button>)
                     : (
                         <Like 
                             handleSubmit={this.handleSubmit}
@@ -121,20 +192,19 @@ class Story extends React.Component {
                     )
                 }
                
-                <h4>{story.body}</h4>
+                <p>{story.body}</p>
                                 
-                <ul>
-                    {story.acceptedComments.map(c => {
-                        return <li key={c._id}>Accepted Comment: {c.body}</li>
-                    })}
-                </ul>
+              
+                {story.acceptedComments.map(c => {
+                    return <p key={c._id}>{c._by}: {c.body}</p>
+                })}
+    
 
                 <Comments
-                    storyId={story._id}
-                    story={this.state.story}
-                    onCommentLike={this.handleCommentLike.bind(this)}
-                    onCommentDelete={this.handleCommentDelete.bind(this)}
-                    currentUser={currentUser}
+                    currentUser={currentUser} 
+                    comments = {this.state.story.comments} 
+                    checkIfLiked = {this.checkIfLiked}
+                    deleteComment = {this.deleteComment}
                 /> 
                 
                 {currentUser ? 
