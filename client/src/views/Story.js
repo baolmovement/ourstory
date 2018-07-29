@@ -170,9 +170,7 @@ class Story extends React.Component {
         const alreadyLiked = !!story.likes.find((l) => l.userId === currentUser._id)
         return (
             <div>
-                <h1>STORY SHOW</h1> 
-                
-                <h2>{story.title}</h2>
+               <h1>{story.title}</h1>
                
                 {currentUser && currentUser._id === story._by ? 
                 <Link to={`/story/${story._id}/edit`}>Edit</Link>
@@ -192,12 +190,12 @@ class Story extends React.Component {
                     )
                 }
                
-                <p>{story.body}</p>
-                                
-              
-                {story.acceptedComments.map(c => {
-                    return <p key={c._id}>{c._by}: {c.body}</p>
-                })}
+                <div className="fullStory">
+                    <p>{story.body}</p>
+                    {story.acceptedComments.map(c => {
+                        return <p key={c._id}>{c.body}</p>
+                    })}
+                </div>
     
 
                 <Comments

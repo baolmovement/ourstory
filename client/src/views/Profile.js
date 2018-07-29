@@ -34,9 +34,9 @@ class Profile extends React.Component {
     render(){
     return (
         <div className="Profile">
-            <h1>PROFILE</h1>
+            <h1 className="pageName">PROFILE</h1>
             <Link to={"/profile/edit"}>EDIT PROFILE</Link> 
-           
+            <h2>Your stories:</h2>
                 {this.state.userstories.map((s) => {
                     return (
                         <p key={s._id}>

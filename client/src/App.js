@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
 import httpClient from './httpClient';
 import './App.css';
-import  './styles/main.css';
+import  './styles/index.css';
 import NavBar from './components/NavBar';
 import Home from './views/Home';
 import Story from './views/Story'

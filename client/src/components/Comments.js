@@ -4,7 +4,7 @@ const Comments = (props) => {
     // if(!this.props.comments)return(<h1>Loading Comments...</h1>)
     return (
         <div className="Home">
-            <h1>COMMENTS</h1>
+            <h1>COMMENTS:</h1>
             <ul>
                 {props.comments.map((c, i) => {
                 return (

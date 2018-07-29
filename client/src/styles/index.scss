@@ -1,0 +1,35 @@
+@import 'components/variables';
+@import url('https://fonts.googleapis.com/css?family=Poiret+One');
+h1{font-size: 35px;}
+.App{
+    font-family: 'Poiret One';
+    height: 100vh;
+}
+button{
+    padding: 15px;
+    background-color: white;
+    border-radius:5px;
+}
+.navbarItem{
+    color: $primary-color;
+    margin: 0 20px;
+    text-decoration: none;
+}
+.Profile{
+    h1{
+        color:red;
+    }
+}
+.Logo{
+    h1{
+        font-size: 70px;
+        margin: 0 auto;
+    }
+}
+.fullStory{
+        text-align:center;
+    p{
+        display: inline-block;
+        text-align: left;
+    }
+}
