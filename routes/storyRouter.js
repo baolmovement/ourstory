@@ -9,8 +9,8 @@ const
 router.get('/', Stories.index)//goes to Stories controller and accesses method called index
 router.get('/:id', Stories.show)//goes to Stories controller and accesses method called show
 router.use(verifyToken)
-// router.delete(':id/likes/:likeid', Stories.unlike)
 router.post('/:id/likes', Stories.like)
+router.delete('/:id/likes/:likesid', Stories.unlike)
 router.post('/:id', Stories.update)//goes to Stories controller and accesses method called update
 router.post('/', Stories.new) //goes to Stories controller and accesses method called new
 router.patch('/:id', Stories.update)//goes to Stories controller and accesses method called update
