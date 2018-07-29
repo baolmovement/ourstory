@@ -5,7 +5,7 @@ const Like = (props) => {
     return( 
         <div>
             <form onSubmit={handleSubmit}>
-                <button> Like </button>
+                <button> LIKE </button>
             </form>
         </div>
     )

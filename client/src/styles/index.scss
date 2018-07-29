@@ -33,3 +33,18 @@ button{
         text-align: left;
     }
 }
+.descriptionInput{
+    width: 100vw;
+}
+
+input{
+    width: 100vw;
+}
+.bodyInput{
+    white-space: initial;
+    height:100px;
+}
+.bodyContainer{
+    overflow-wrap: break-word;  
+    word-break: break-all
+}

@@ -6,9 +6,9 @@ const StoryForm = (props) => {
         <div>
             <form onSubmit={handleSubmit}>
                 <input onChange={handleChange} type="text" name="title" placeholder="title" value={title}/>
-                <input onChange={handleChange} type="text" name="description" placeholder="description" value={description}/>
-                <input onChange={handleChange} type="text" name="body" placeholder="body" value={body}/>
-                <button> Submit </button>
+                <div><input onChange={handleChange} type="text" name="description" placeholder="description" value={description}/></div>
+                <div><input onChange={handleChange} type="text" name="body" placeholder="body" value={body} className="bodyInput"/></div>
+                <button> SUBMIT </button>
             </form>
         </div>
     )

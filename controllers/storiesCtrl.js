@@ -66,13 +66,13 @@ exports.like = (req, res) => {
 exports.unlike = (req,res) => {
     Story.findById(req.params.id, (err, story) => {
         if(err) return console.log("banana");
-        // console.log(req.user._id)
-        // console.log(story.likes)
-        // console.log(story.likes.filter(l => { 
-        //     !l.userId.equals(req.user._id)
-        //     }))
-        // console.log(story.likes.filter(l => !l.userId.equals(req.user._id)
-        //     ))
+        console.log(req.user._id)
+        console.log(story.likes)
+        console.log(story.likes.filter(l => { 
+            !l.userId.equals(req.user._id)
+            }))
+        console.log(story.likes.filter(l => !l.userId.equals(req.user._id)
+            ))
        
         let { _id } = req.user;
         story.likes = story.likes.filter(l =>  

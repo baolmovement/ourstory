@@ -25,9 +25,9 @@ class CommentFormModal extends Component {
                     onChange={this.handleChange}
                     onSubmit={this.handleSubmit}
                 >
-                    <input type="text" placeholder="description" name="description" autoComplete="off" />
-                    <input type="text" placeholder="body" name="body" autoComplete="off" />
-                    <button>Submit</button>
+                    <input type="text" placeholder="description" name="description" autoComplete="off" className="descriptionInput" />
+                    <div className="bodyContainer"><input type="text" placeholder="body" name="body" autoComplete="on" className="bodyInput" /></div>
+                    <button>SUBMIT</button>
                 </form>
             </div>     
         )

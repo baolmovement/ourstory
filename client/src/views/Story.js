@@ -19,14 +19,9 @@ class Story extends React.Component {
         })
     } 
 
-    getUserName = () => {
-        httpClient({
-            method: 'get',
-            url:`/api/users/${this.props.match.params.id}`
-        })
-    }
+    //Story Methods
 
-    handleSubmit = (e) => {
+    handleStoryLikeSubmit = (e) => {
         const { currentUser } = this.props
         e.preventDefault()
         httpClient({
@@ -42,40 +37,7 @@ class Story extends React.Component {
         })
     }
 
-    handleCommentFormSubmit = (commentInfo) => {
-        const storyId = this.props.match.params.id
-        httpClient({
-            method: 'post', 
-            url: `/api/stories/${storyId}/comments`,
-            data: commentInfo
-        })
-        .then(apiResponse => {
-            const newComment = apiResponse.data.payload
-            this.setState({
-                story: {
-                    ...this.state.story,
-                    comments: [ ...this.state.story.comments, newComment ]
-                }
-            });
-        })
-        console.log(this.state.story.comments)
-    }
-
-    handleCommentLike(updatedStory) {
-        this.setState({ story: updatedStory })
-        // const { story } = this.state
-        // const commentIndex = story.comments.findIndex((c) => c._id === likedComment._id)
-        // this.setState({
-        //     story: {
-        //         ...story,
-        //         comments: [
-        //             ...story.comments.slice(0, commentIndex),
-        //             likedComment,
-        //             ...story.comments.slice(commentIndex + 1)
-        //         ]            }
-        // })
-    }
-
+  
     handleStoryUnlike = (e) => {
         e.preventDefault()
          httpClient({
@@ -110,6 +72,40 @@ class Story extends React.Component {
     }
 
     //comment methods 
+    handleCommentFormSubmit = (commentInfo) => {
+        const storyId = this.props.match.params.id
+        httpClient({
+            method: 'post', 
+            url: `/api/stories/${storyId}/comments`,
+            data: commentInfo
+        })
+        .then(apiResponse => {
+            const newComment = apiResponse.data.payload
+            this.setState({
+                story: {
+                    ...this.state.story,
+                    comments: [ ...this.state.story.comments, newComment ]
+                }
+            });
+        })
+        console.log(this.state.story.comments)
+    }
+
+    handleCommentLike(updatedStory) {
+        this.setState({ story: updatedStory })
+        // const { story } = this.state
+        // const commentIndex = story.comments.findIndex((c) => c._id === likedComment._id)
+        // this.setState({
+        //     story: {
+        //         ...story,
+        //         comments: [
+        //             ...story.comments.slice(0, commentIndex),
+        //             likedComment,
+        //             ...story.comments.slice(commentIndex + 1)
+        //         ]            }
+        // })
+    }
+
     handleSubmit = (e) => {
         e.preventDefault()
         let { id } = e.target.dataset
@@ -154,7 +150,7 @@ class Story extends React.Component {
      checkIfLiked = (c) => {
          let { likes } = c;
          let liked = likes.find(l => l.userId === this.props.currentUser._id);
-         if (!!liked) return <button onClick={this.handleUnlike} data-id={c._id}>Unlike</button>;
+         if (!!liked) return <button onClick={this.handleUnlike} data-id={c._id}>UNLIKE</button>;
          return (
              <form data-id={c._id} onSubmit={this.handleSubmit}>
                  <button>LIKE</button>
@@ -178,13 +174,12 @@ class Story extends React.Component {
                 
                 <h3>{story.likes.length} likes</h3>
 
-                {}
                 
                 {alreadyLiked
-                    ? (<button onClick={this.handleUnlike.bind(this)}>Unlike</button>)
+                    ? (<button onClick={this.handleStoryUnlike}>UNLIKE</button>)
                     : (
                         <Like 
-                            handleSubmit={this.handleSubmit}
+                            handleSubmit={this.handleStoryLikeSubmit}
                             currentUser={currentUser}  
                         />  
                     )
