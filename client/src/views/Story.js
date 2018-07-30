@@ -45,7 +45,7 @@ class Story extends React.Component {
              url: `/api/stories/${this.state.story._id}/likes/${this.props.currentUser._id}`,
          })
          .then(apiResponse => {
-            this.props.history.push('/')
+            this.setState({story: apiResponse.data.payload})
         })
      }
 
@@ -192,7 +192,6 @@ class Story extends React.Component {
                     })}
                 </div>
     
-
                 <Comments
                     currentUser={currentUser} 
                     comments = {this.state.story.comments} 

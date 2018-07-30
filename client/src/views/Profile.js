@@ -39,9 +39,12 @@ class Profile extends React.Component {
             <h2>Your stories:</h2>
                 {this.state.userstories.map((s) => {
                     return (
-                        <p key={s._id}>
-                            <Link to={`/story/${s._id}`}>{s.title}</Link>
-                        </p>
+                        <div className="storyLinks">
+                            <p key={s._id}>
+                                <Link to={`/story/${s._id}`} className="storyName">{s.title}</Link>
+                                <p className="storyLikeCount">{s.likes.length} likes</p>
+                            </p>
+                        </div>
                     )
                 })}
             <div><button onClick={this.deleteUser}>DELETE ACCOUNT</button></div> 

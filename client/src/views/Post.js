@@ -27,7 +27,7 @@ class Post extends Component {
             data: {title, description, body}
         })
         .then(apiResponse => {
-            this.props.history.push(`/stories/${apiResponse.data.payload._id}`)
+            this.props.history.push('/')
         })
     }
 

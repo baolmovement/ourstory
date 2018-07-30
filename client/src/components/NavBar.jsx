@@ -21,6 +21,8 @@ const NavBar = (props) => {
                     </Fragment>
                 )
             }
+            <Link to="/about" className="navbarItem"> About </Link>
+            <Link to="/contact" className="navbarItem"> Contact </Link>
         </div>
     )
 }

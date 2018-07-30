@@ -5,6 +5,8 @@ import './App.css';
 import  './styles/index.css';
 import NavBar from './components/NavBar';
 import Home from './views/Home';
+import About from './views/About';
+import Contact from './views/Contact';
 import Story from './views/Story'
 import SignUp from './views/Signup';
 import LogIn from './views/Login'; 
@@ -80,6 +82,10 @@ class App extends Component {
           }} />
           
           <Route path='/post' component={Post} />
+
+          <Route exact path = "/contact" component = {Contact} />
+
+          <Route exact path = "/about" component = {About} />
           
           <Route exact path = "/" component = {Home} />
         </Switch>

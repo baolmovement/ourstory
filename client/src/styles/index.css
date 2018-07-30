@@ -11,13 +11,43 @@ button {
   background-color: white;
   border-radius: 5px; }
 
+button:hover {
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  color: white; }
+
+.storyLinks:hover {
+  background-color: rgba(0, 0, 0, 0.4); }
+  .storyLinks:hover .storyName {
+    color: white;
+    font-size: 30px;
+    text-transform: uppercase; }
+
 .navbarItem {
   color: black;
   margin: 0 20px;
   text-decoration: none; }
 
+.navbarItem:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  color: white; }
+
+.NavBar {
+  margin-bottom: 50px; }
+
 .Profile h1 {
   color: red; }
+
+.About {
+  margin: 0 auto; }
+  .About p {
+    width: 40vw; }
+
+.aboutBody {
+  text-align: center;
+  margin: 0 auto; }
 
 .Logo h1 {
   font-size: 70px;
@@ -37,7 +67,8 @@ input {
 
 .bodyInput {
   white-space: initial;
-  height: 100px; }
+  height: 100px;
+  margin-bottom: 20px; }
 
 .bodyContainer {
   overflow-wrap: break-word;

@@ -23,8 +23,10 @@ class Home extends React.Component {
                 {this.state.stories.map((s) => {
                 return (
                     <p key={s._id}>
-                        <Link to={`/story/${s._id}`}>{s.title}</Link>
-                        <p>{s.likes.length} likes</p>
+                        <div className="storyLinks">
+                            <Link to={`/story/${s._id}`} className="storyName">{s.title}</Link>
+                            <p className="storyLikeCount">{s.likes.length} likes</p>
+                        </div>
                     </p>
                 )
                 })}    
