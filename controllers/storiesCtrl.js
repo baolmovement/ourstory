@@ -1,5 +1,6 @@
 const Story = require('../models/Story.js');
 
+//Retrieves all stories in story DB
 exports.index = (req, res) => {
     Story.find({}).populate('_by').exec((err, Story) => {
         if(err){
@@ -10,6 +11,7 @@ exports.index = (req, res) => {
     }) 
 };
 
+//Creates a new story
 exports.new = (req, res) => {
     Story.create({ ...req.body, _by: req.user}, (err, newStory) => {
         if(err){
@@ -20,6 +22,7 @@ exports.new = (req, res) => {
     })
 }
 
+//Retrieves a single story by it's ID
 exports.show = (req,res) => {
     Story.findById(req.params.id).populate('comments').populate('acceptedComments').exec((err, Story) =>{
         if(err){
@@ -30,6 +33,7 @@ exports.show = (req,res) => {
     })
 }
 
+//Retrieves a single story by ID and re-enters data with req.body
 exports.update = (req,res) => {
     Story.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedStory) => {
         if(err) return console.log(err);
@@ -37,6 +41,7 @@ exports.update = (req,res) => {
     })
 }
 
+//Retrieves a single story by ID and deletes it from story DB
 exports.destroy = (req,res) => {
     Story.findByIdAndRemove(req.params.id, (err, deletedStory) => {
         if(err) return console.log(err);
@@ -44,17 +49,19 @@ exports.destroy = (req,res) => {
     })
 }
 
+//Retrieves a single story by id and updates its 'likes' field by pushing a new user object.
 exports.like = (req, res) => {
-    Story.findById(req.params.id, (err, story) => {
+    Story.findById(req.params.id).populate('comments').exec((err, story) => {
         if(err) return console.log(err);
         const alreadyLiked = !!(story.likes.find((l) => {
             return l.userId.equals(req.user._id)
         }))
-        console.log(alreadyLiked);
+        // console.log(alreadyLiked);
         if(!alreadyLiked){
             story.likes.push({userId: req.user._id})
             story.save((err) => {
                 if(err)return console.log(err, story)
+                console.log(story)
                 res.json({status: "SUCCESS", payload: story})
             })
         } else {
@@ -63,8 +70,9 @@ exports.like = (req, res) => {
     })
 }
 
+//Retrieves a single story by id and updates its 'likes' field with new array, minus a like with same user ID as current user.
 exports.unlike = (req,res) => {
-    Story.findById(req.params.id, (err, story) => {
+    Story.findById(req.params.id).populate('comments').exec((err, story) => {
         if(err) return console.log("banana");
         console.log(req.user._id)
         console.log(story.likes)
@@ -81,7 +89,7 @@ exports.unlike = (req,res) => {
 
         story.save((err) => {
             if(err)return console.log(err, story)
-            res.json({ status: "SUCCESS" })
+            res.json({ status: "SUCCESS", payload: story })
 
         })
        

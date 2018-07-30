@@ -36,6 +36,10 @@ class Profile extends React.Component {
         <div className="Profile">
             <h1 className="pageName">PROFILE</h1>
             <Link to={"/profile/edit"}>EDIT PROFILE</Link> 
+            {this.state.userstories.length===0 ?
+                <h2>Seems like you're new</h2>
+                : null
+            }
             <h2>Your stories:</h2>
                 {this.state.userstories.map((s) => {
                     return (

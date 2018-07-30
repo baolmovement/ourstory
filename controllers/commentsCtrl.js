@@ -1,7 +1,7 @@
 const Story = require('../models/Story')
 const Comment = require('../models/Comment.js');
 
-
+//Retrieves all comments by a specified author in comments DB
 exports.index = (req, res) => {
     Comment.find({storyid: req.params.id}, (err, comments) => {
         if(err){
@@ -12,6 +12,7 @@ exports.index = (req, res) => {
     }) 
 };
 
+//Just for testing
 exports.show = (req, res) => {
     Comment.findById(req.params.commentid, (err, comment) =>{
         if(err){
@@ -22,7 +23,7 @@ exports.show = (req, res) => {
     })
 }
 
-
+//Creates a new comment in the specified story's comments field
 exports.new = (req, res) => {
     console.log(req.params)
     Comment.create({ ...req.body, _by: req.user, _story: req.params.id}, (err, newComment) => {
@@ -41,7 +42,7 @@ exports.new = (req, res) => {
     })
 }
 
-
+//Finds a comment by ID and pushes current user's ID to its 'likes' array field
 exports.like = (req, res) => {
     Comment.findById(req.params.commentid, (err, comment) => {
         console.log(comment)
@@ -77,13 +78,14 @@ exports.like = (req, res) => {
     })
 }
 
+//Finds a specified comment by ID and deletes it from the story's comments array field
 exports.destroy = (req,res) => {
     Comment.findByIdAndRemove(req.params.commentid, (err, deletedComment) => {
         if(err) return console.log(err);
         res.json({status: "DELETED", payload: deletedComment})
     })
 }
-
+//Finds specified comment by ID and updates its 'likes' field array without the current user object
 exports.unlike = (req,res) => {
     Comment.findById(req.params.commentid, (err, comment) => {
         if(err) return console.log(err);

@@ -1,10 +1,12 @@
 @import 'components/variables';
 @import url('https://fonts.googleapis.com/css?family=Poiret+One');
-h1{font-size: 35px;}
+
+//Global styles
 .App{
     font-family: 'Poiret One';
     height: 100vh;
 }
+
 button{
     padding: 15px;
     background-color: white;
@@ -16,6 +18,9 @@ button:hover{
     border-radius:5px;  
     color: white;
 }
+
+h1{font-size: 35px;}
+
 .storyLinks:hover{
     background-color: rgba(0,0,0,.4);
     .storyName{
@@ -24,6 +29,15 @@ button:hover{
         text-transform: uppercase;
     }
 }
+
+//Navbar Styling
+.Logo{
+    h1{
+        font-size: 70px;
+        margin: 0 auto;
+    }
+}
+
 .navbarItem{
     color: $primary-color;
     margin: 0 20px;
@@ -37,12 +51,15 @@ button:hover{
 .NavBar{
     margin-bottom: 50px;
 }
+
+//Profile Styling
 .Profile{
     h1{
         color:red;
     }
 }
 
+//About Styling
 .About{
     margin: 0 auto;
     p{
@@ -53,12 +70,8 @@ button:hover{
     text-align: center;
     margin: 0 auto;
 }
-.Logo{
-    h1{
-        font-size: 70px;
-        margin: 0 auto;
-    }
-}
+
+//Story Styling
 .fullStory{
         text-align:center;
     p{

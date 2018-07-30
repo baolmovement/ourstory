@@ -55,7 +55,7 @@ module.exports = {
             }
         })
 	},
-    
+    //Checks to see if provided inputs matches any users in DB(if successful, a token is assigned)
     authenticate: (req, res) => {
 		User.findOne({email: req.body.email}, (err, user) => {
 			if(err) return res.json({message: "ERROR", payload: null, code: err.code})
