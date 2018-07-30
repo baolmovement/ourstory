@@ -11,6 +11,7 @@ button{
     padding: 15px;
     background-color: white;
     border-radius:5px;
+    margin: 5px;
 }
 button:hover{
     padding: 15px;
@@ -55,7 +56,20 @@ h1{font-size: 35px;}
 //Profile Styling
 .Profile{
     h1{
-        color:red;
+        color:black;
+    }
+    .newUserMessage{
+        font-size: 50px;
+        margin: 0 auto;
+        background: -webkit-linear-gradient(rgb(255, 111, 0), rgb(255, 255, 0));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .firstPost:hover{
+        background-color: rgba(0,0,0,.4);
+        color: white;
+        font-size: 30px;
+        text-transform: uppercase;
     }
 }
 
@@ -74,6 +88,7 @@ h1{font-size: 35px;}
 //Story Styling
 .fullStory{
         text-align:center;
+        padding: 0 50px;
     p{
         display: inline-block;
         text-align: left;
@@ -83,15 +98,19 @@ h1{font-size: 35px;}
     width: 100vw;
 }
 
-input{
+input, textarea{
     width: 100vw;
 }
-.bodyInput{
-    white-space: initial;
-    height:100px;
-    margin-bottom: 20px;
+.storyTitle{
+    font-size: 70px;
+    margin-bottom: 0;
 }
-.bodyContainer{
-    overflow-wrap: break-word;  
-    word-break: break-all
-}
+// .bodyInput{
+//     white-space: initial;
+//     height:100px;
+//     margin-bottom: 20px;
+// }
+// .bodyContainer{
+//     overflow-wrap: break-word;  
+//     word-break: break-all
+// }

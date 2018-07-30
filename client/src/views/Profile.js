@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios' 
 import {Link} from 'react-router-dom'
 import httpClient from '../httpClient'
+import About from './About'
 
 const apiClient = axios.create()
 
@@ -35,9 +36,13 @@ class Profile extends React.Component {
     return (
         <div className="Profile">
             <h1 className="pageName">PROFILE</h1>
-            <Link to={"/profile/edit"}>EDIT PROFILE</Link> 
+            <Link to={"/profile/edit"} className="navbarItem">EDIT PROFILE</Link> 
             {this.state.userstories.length===0 ?
-                <h2>Seems like you're new</h2>
+                <div>
+                    <p className="newUserMessage">Seems like you're new</p>
+                    <About />
+                    <Link to={'/post'} className="firstPost">Create your first post!</Link> 
+                </div>
                 : null
             }
             <h2>Your stories:</h2>

@@ -129,7 +129,7 @@ class Story extends React.Component {
              url: `/api/stories/${this.state.story._id}/comments/${id}/likes/${this.props.currentUser._id}`,
          })
          .then(apiResponse => {
-            this.props.history.push('/')
+            this.setState({story: apiResponse.data.payload})
            
         })
      }
@@ -166,7 +166,7 @@ class Story extends React.Component {
         const alreadyLiked = !!story.likes.find((l) => l.userId === currentUser._id)
         return (
             <div>
-               <h1>{story.title}</h1>
+               <h1 className="storyTitle">{story.title}</h1>
                
                 {currentUser && currentUser._id === story._by ? 
                 <Link to={`/story/${story._id}/edit`}>Edit</Link>

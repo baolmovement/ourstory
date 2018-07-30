@@ -14,6 +14,11 @@ const storySchema = new mongoose.Schema({
     acceptedComments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
 })  
 
+storySchema.pre('findOne', function(next) {
+    this.populate('comments')
+    this.populate('acceptedComments')
+    next()
+})
 
 const Story = mongoose.model('Story', storySchema) 
 module.exports = Story

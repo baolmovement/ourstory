@@ -15,18 +15,33 @@ class CommentFormModal extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.onFormSubmit(this.state)
-        e.target.value = null
+        // e.target.value = null
+        this.setState({
+            description: "",
+            body: ""
+        })
     }
     
     render(){
         return ( 
             <div className="CommentForm">
-                <form
-                    onChange={this.handleChange}
-                    onSubmit={this.handleSubmit}
-                >
-                    <input type="text" placeholder="description" name="description" autoComplete="off" className="descriptionInput" />
-                    <div className="bodyContainer"><input type="text" placeholder="body" name="body" autoComplete="on" className="bodyInput" /></div>
+                <form onSubmit={this.handleSubmit}>
+                    <input type="text" placeholder="description" name="description"
+                        autoComplete="off"
+                        className="descriptionInput"
+                        onChange={this.handleChange}
+                        value={this.state.description}
+                    />
+                    <div className="bodyContainer">
+                        {/* <input type="text" placeholder="body" name="body" autoComplete="on" className="bodyInput" /> */}
+                        <textarea rows={10} placeholder="body" name="body"
+                            autoComplete="on"
+                            className="bodyInput"
+                            onChange={this.handleChange}
+                            value={this.state.body}
+                        >
+                        </textarea>
+                    </div>
                     <button>SUBMIT</button>
                 </form>
             </div>     

@@ -24,7 +24,7 @@ exports.new = (req, res) => {
 
 //Retrieves a single story by it's ID
 exports.show = (req,res) => {
-    Story.findById(req.params.id).populate('comments').populate('acceptedComments').exec((err, Story) =>{
+    Story.findById(req.params.id, (err, Story) =>{
         if(err){
             res.json({status: "Fail", err})
         } else {
@@ -51,7 +51,7 @@ exports.destroy = (req,res) => {
 
 //Retrieves a single story by id and updates its 'likes' field by pushing a new user object.
 exports.like = (req, res) => {
-    Story.findById(req.params.id).populate('comments').exec((err, story) => {
+    Story.findById(req.params.id, (err, story) => {
         if(err) return console.log(err);
         const alreadyLiked = !!(story.likes.find((l) => {
             return l.userId.equals(req.user._id)
@@ -72,7 +72,7 @@ exports.like = (req, res) => {
 
 //Retrieves a single story by id and updates its 'likes' field with new array, minus a like with same user ID as current user.
 exports.unlike = (req,res) => {
-    Story.findById(req.params.id).populate('comments').exec((err, story) => {
+    Story.findById(req.params.id, (err, story) => {
         if(err) return console.log("banana");
         console.log(req.user._id)
         console.log(story.likes)
