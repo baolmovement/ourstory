@@ -6,8 +6,7 @@ const
     logger = require('morgan'),
     mongoose = require('mongoose'),
     userRouter = require('./routes/userRouter.js'),
-    storyRouter = require('./routes/storyRouter.js'), 
-    PORT = 3001;  
+    storyRouter = require('./routes/storyRouter.js')
 
 //DB CONNECTION 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }, (err) => {
@@ -24,6 +23,6 @@ app.use('/api/users', userRouter) //Express using routes from a seperate file ca
 app.use('/api/stories', storyRouter) //Express using routes from a seperate file called storyRouter.js
 
 //BACKEND PORT
-app.listen(PORT, (err) => {
-    console.log(err || `Served on ${PORT}`)
+app.listen(process.env.PORT, (err) => {
+    console.log(err || `Served on ${process.env.PORT}`)
 })
