@@ -24,7 +24,7 @@ class SignUp extends React.Component {
     httpClient.signUp(fields).then((user) => {
     if(user) {
       this.props.onSignUpSuccess()
-      this.props.history.push('/')
+      this.props.history.push('/profile')
     }
     })
   }

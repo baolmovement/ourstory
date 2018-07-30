@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React, {Button} from 'react'
 
 class About extends React.Component {
     render(){
@@ -9,7 +8,6 @@ class About extends React.Component {
             <strong>E-Mail:</strong><p>bao.andrew@gmail.com</p>
             <strong>Telephone:</strong><p>800.000.0085</p>
             <strong>Fax:</strong><p>800.813.5420</p>
-
         </div>
     )
     }

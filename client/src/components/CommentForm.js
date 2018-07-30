@@ -34,7 +34,7 @@ class CommentFormModal extends Component {
                     />
                     <div className="bodyContainer">
                         {/* <input type="text" placeholder="body" name="body" autoComplete="on" className="bodyInput" /> */}
-                        <textarea rows={10} placeholder="body" name="body"
+                        <textarea rows={10} placeholder="body (NOTE: REMEMBER PUNCTUATION AND SPACES!)" name="body"
                             autoComplete="on"
                             className="bodyInput"
                             onChange={this.handleChange}

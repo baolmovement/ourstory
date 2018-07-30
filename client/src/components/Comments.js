@@ -4,13 +4,13 @@ const Comments = (props) => {
     // if(!this.props.comments)return(<h1>Loading Comments...</h1>)
     return (
         <div className="Home">
-            <h1>COMMENTS:</h1>
+            <h1>ADLIBS:</h1>
           
                 {props.comments.map((c, i) => {
                 return (
                     <p key={i}>
-                        <p>{c.description}</p> 
-                        <p>{c.body}</p>
+                        <div className="commentInfo"> <strong>DESCRIPTION:</strong> <span> {c.description}</span> </div>
+                        <div className="commentInfo"><strong>BODY:</strong> <span>{c.body}</span></div>
                         <p>{c.likes.length} likes</p> 
                         {props.checkIfLiked(c)}
                         {props.currentUser._id===c._by

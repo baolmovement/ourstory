@@ -25,6 +25,12 @@ h1 {
     font-size: 30px;
     text-transform: uppercase; }
 
+.commentInfo {
+  margin-bottom: 5px; }
+
+.commentLike {
+  display: inline-block; }
+
 .Logo h1 {
   font-size: 70px;
   margin: 0 auto; }

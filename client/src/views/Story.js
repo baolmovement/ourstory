@@ -152,7 +152,7 @@ class Story extends React.Component {
          let liked = likes.find(l => l.userId === this.props.currentUser._id);
          if (!!liked) return <button onClick={this.handleUnlike} data-id={c._id}>UNLIKE</button>;
          return (
-             <form data-id={c._id} onSubmit={this.handleSubmit}>
+             <form data-id={c._id} onSubmit={this.handleSubmit} className="commentLike">
                  <button>LIKE</button>
              </form>
          )
