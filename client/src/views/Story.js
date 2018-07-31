@@ -191,23 +191,24 @@ class Story extends React.Component {
                         return <p key={c._id}>{c.body}</p>
                     })}
                 </div>
-    
-                <Comments
-                    currentUser={currentUser} 
-                    comments = {this.state.story.comments} 
-                    checkIfLiked = {this.checkIfLiked}
-                    deleteComment = {this.deleteComment}
-                /> 
-                
-                {currentUser ? 
-                <CommentFormModal
-                    onFormSubmit={this.handleCommentFormSubmit.bind(this)}
-                />
-                : null}
-                
-                {currentUser && currentUser._id === story._by ?
-                <button onClick={this.deleteStory}>DELETE</button>
-                : null}
+                <div className="commentSection">
+                    <Comments
+                        currentUser={currentUser} 
+                        comments = {this.state.story.comments} 
+                        checkIfLiked = {this.checkIfLiked}
+                        deleteComment = {this.deleteComment}
+                    /> 
+                    
+                    {currentUser ? 
+                    <CommentFormModal
+                        onFormSubmit={this.handleCommentFormSubmit.bind(this)}
+                    />
+                    : null}
+                    
+                    {currentUser && currentUser._id === story._by ?
+                    <button onClick={this.deleteStory}>DELETE</button>
+                    : null}
+                </div>
             </div>
         )
     }
