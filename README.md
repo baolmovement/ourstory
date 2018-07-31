@@ -9,7 +9,7 @@
 ![](https://i.imgur.com/eKhVqlK.png)
 ![](https://i.imgur.com/CgtpWdN.png)
 ![](https://i.imgur.com/TIW0Tb4.png)
-![](https://i.imgur.com/wdz9HaZ.png)
+![](https://i.imgur.com/H6kkEM0.png)
 
 ---
 # WIREFRAME
