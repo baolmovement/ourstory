@@ -5,24 +5,24 @@
 ### TRELLO BOARD [CLICK HERE](https://trello.com/invite/b/WihFSWBB/00a8a2297f6985318f147c990396f19d/p4-quilt) 
 
 ---
-# APP SCREENSHOTS
+# APP SCREENSHOTS:
 ![](https://i.imgur.com/eKhVqlK.png)
 ![](https://i.imgur.com/CgtpWdN.png)
 ![](https://i.imgur.com/TIW0Tb4.png)
 ![](https://i.imgur.com/H6kkEM0.png)
 
 ---
-# WIREFRAME
+# WIREFRAME:
 ![](https://i.imgur.com/syShzZz.png)
 
 --- 
 
-# ERD 
+# ERD: 
 ![](https://i.imgur.com/zDN4vYz.png)
 
 ---
 
-# TECHNOLGIES USED:
+# TECHNOLOGIES USED:
 1. EXPRESS: App framework
 2. REACT: Library used for single-page frontend UI
 3. AXIOS: Pass data from backend to frontend.
@@ -34,7 +34,7 @@
 9. GIT: Version control
 10. MONGO/MONGOOSE: Database/Data-Structuring
 
-# HOW TO INSTALL
+# HOW TO INSTALL:
 1. On the repo's Github page, click "Clone" and copy provided URL.
 2. In terminal: `git clone 'this-repo-url' app-name`+
 `cd app-name`+`nodemon`
